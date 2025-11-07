@@ -1,0 +1,827 @@
+/**
+ * Label Narrative Theme - Main Stylesheet
+ * Conversion-optimized, mobile-first responsive design
+ *
+ * Table of Contents:
+ * 1. CSS Variables
+ * 2. Reset & Base Styles
+ * 3. Typography
+ * 4. Layout & Grid
+ * 5. Header
+ * 6. Hero Section
+ * 7. Story Section
+ * 8. Benefits Section
+ * 9. Product Section
+ * 10. Trust Section
+ * 11. CTA Section
+ * 12. Footer
+ * 13. WooCommerce Overrides
+ * 14. Conversion Optimization Elements
+ * 15. Responsive Design
+ */
+
+/* ============================================
+   1. CSS VARIABLES
+   ============================================ */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #10b981;
+    --text-color: #1f2937;
+    --text-light: #6b7280;
+    --bg-color: #ffffff;
+    --bg-light: #f9fafb;
+    --border-color: #e5e7eb;
+
+    --font-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-heading: 'Georgia', 'Times New Roman', serif;
+
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+    --spacing-xl: 4rem;
+    --spacing-xxl: 6rem;
+
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
+
+    --transition: all 0.3s ease;
+
+    --max-width: 1200px;
+    --max-width-narrow: 800px;
+}
+
+/* ============================================
+   2. RESET & BASE STYLES
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-base);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+/* ============================================
+   3. TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-color);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+    margin-bottom: var(--spacing-sm);
+}
+
+/* ============================================
+   4. LAYOUT & GRID
+   ============================================ */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.container-narrow {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.site {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-area {
+    flex: 1;
+}
+
+/* ============================================
+   5. HEADER
+   ============================================ */
+.site-header {
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.header-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+}
+
+.site-branding {
+    flex: 1;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.site-title a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.site-description {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-light);
+}
+
+.custom-logo-link img {
+    max-height: 60px;
+    width: auto;
+}
+
+/* Navigation */
+.main-navigation {
+    display: flex;
+    align-items: center;
+}
+
+.main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-md);
+    margin: 0;
+}
+
+.main-navigation a {
+    color: var(--text-color);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    display: block;
+}
+
+.main-navigation a:hover {
+    color: var(--primary-color);
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.menu-toggle-icon {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    position: relative;
+}
+
+.menu-toggle-icon::before,
+.menu-toggle-icon::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    left: 0;
+}
+
+.menu-toggle-icon::before {
+    top: -8px;
+}
+
+.menu-toggle-icon::after {
+    bottom: -8px;
+}
+
+/* Cart Icon */
+.header-cart {
+    position: relative;
+}
+
+.cart-icon {
+    font-size: 1.5rem;
+    position: relative;
+    display: block;
+    padding: 0.5rem;
+}
+
+.cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--secondary-color);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============================================
+   6. HERO SECTION
+   ============================================ */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+    color: white;
+    padding: var(--spacing-xxl) 0;
+    text-align: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-overlay {
+    background: rgba(37, 99, 235, 0.9);
+    padding: var(--spacing-xxl) 0;
+}
+
+.hero-content {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+}
+
+.hero-headline {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    color: white;
+}
+
+.hero-subheadline {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.8;
+}
+
+.hero-cta {
+    margin-top: var(--spacing-lg);
+}
+
+/* ============================================
+   7. STORY SECTION
+   ============================================ */
+.story-section {
+    padding: var(--spacing-xxl) 0;
+    background: var(--bg-color);
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+}
+
+.story-image img {
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.story-content h2 {
+    margin-bottom: var(--spacing-md);
+}
+
+.story-text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-light);
+}
+
+/* ============================================
+   8. BENEFITS SECTION
+   ============================================ */
+.benefits-section {
+    padding: var(--spacing-xxl) 0;
+    background: var(--bg-light);
+}
+
+.section-headline {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.benefit-item {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.benefit-title {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.benefit-description {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* ============================================
+   9. PRODUCT SECTION
+   ============================================ */
+.product-section {
+    padding: var(--spacing-xxl) 0;
+    background: var(--bg-color);
+}
+
+/* ============================================
+   10. TRUST SECTION
+   ============================================ */
+.trust-section {
+    padding: var(--spacing-xxl) 0;
+    background: var(--bg-light);
+}
+
+.trust-badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.trust-badge-item {
+    background: white;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: 600;
+    border: 2px solid var(--border-color);
+}
+
+.reviews-preview {
+    margin-top: var(--spacing-xl);
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.review-item {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.review-rating {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.review-content {
+    font-style: italic;
+    color: var(--text-light);
+    margin-bottom: var(--spacing-sm);
+}
+
+.review-author {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* ============================================
+   11. CTA SECTION
+   ============================================ */
+.cta-section {
+    padding: var(--spacing-xxl) 0;
+    text-align: center;
+}
+
+.cta-content {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+}
+
+.cta-headline {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.cta-subheadline {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin-bottom: var(--spacing-lg);
+}
+
+.cta-button-wrap {
+    margin-top: var(--spacing-lg);
+}
+
+/* ============================================
+   12. FOOTER
+   ============================================ */
+.site-footer {
+    background: var(--text-color);
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: auto;
+}
+
+.footer-widgets {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-widget-area {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.footer-widget h2 {
+    color: white;
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.footer-widget a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-widget a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    padding: var(--spacing-md) 0;
+}
+
+.footer-info {
+    text-align: center;
+}
+
+.footer-contact {
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-copyright {
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-navigation ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   13. WOOCOMMERCE OVERRIDES
+   ============================================ */
+.woocommerce-page .product-page {
+    padding: var(--spacing-xl) 0;
+}
+
+.woocommerce div.product {
+    margin-bottom: var(--spacing-xl);
+}
+
+.woocommerce div.product .product-hero {
+    background: white;
+}
+
+.woocommerce div.product div.images {
+    margin-bottom: var(--spacing-lg);
+}
+
+.woocommerce div.product div.summary {
+    margin-bottom: var(--spacing-lg);
+}
+
+.product-story-section {
+    padding: var(--spacing-xl) 0;
+    background: var(--bg-light);
+}
+
+.product-story-section h2 {
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.product-story-content {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-light);
+}
+
+.product-specifications {
+    padding: var(--spacing-xl) 0;
+    background: white;
+}
+
+.product-specifications h3 {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.specs-list {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    list-style: none;
+}
+
+.specs-list li {
+    padding: var(--spacing-sm);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1rem;
+}
+
+.specs-list li:last-child {
+    border-bottom: none;
+}
+
+/* ============================================
+   14. CONVERSION OPTIMIZATION ELEMENTS
+   ============================================ */
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    color: white;
+}
+
+.btn-large {
+    padding: 1.125rem 2.5rem;
+    font-size: 1.125rem;
+}
+
+/* WooCommerce Add to Cart Button */
+.woocommerce button.button,
+.woocommerce a.button,
+.woocommerce input.button {
+    background: var(--secondary-color);
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.woocommerce button.button:hover,
+.woocommerce a.button:hover,
+.woocommerce input.button:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    color: white;
+}
+
+/* Trust Badges on Product Page */
+.product-trust-badges {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.trust-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    background: var(--bg-light);
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+}
+
+.trust-badge-icon {
+    font-size: 1.25rem;
+}
+
+/* Urgency Message */
+.urgency-message {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+    color: #92400e;
+}
+
+.urgency-icon {
+    font-size: 1.25rem;
+}
+
+/* ============================================
+   15. RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 1024px) {
+    :root {
+        --spacing-xxl: 4rem;
+        --spacing-xl: 3rem;
+    }
+
+    h1 { font-size: 2.25rem; }
+    h2 { font-size: 1.875rem; }
+
+    .hero-headline {
+        font-size: 2.5rem;
+    }
+
+    .story-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --spacing-xxl: 3rem;
+        --spacing-xl: 2rem;
+        --spacing-lg: 2rem;
+    }
+
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+
+    .header-container {
+        flex-wrap: wrap;
+    }
+
+    .menu-toggle {
+        display: block;
+        order: 1;
+    }
+
+    .site-branding {
+        order: 2;
+    }
+
+    .header-cart {
+        order: 3;
+    }
+
+    .main-navigation {
+        order: 4;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: var(--transition);
+    }
+
+    .main-navigation.toggled {
+        max-height: 500px;
+    }
+
+    .main-navigation ul {
+        flex-direction: column;
+        width: 100%;
+        padding: var(--spacing-md) 0;
+    }
+
+    .hero-headline {
+        font-size: 2rem;
+    }
+
+    .hero-subheadline {
+        font-size: 1.125rem;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-headline {
+        font-size: 2rem;
+    }
+
+    .footer-widget-area {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .product-trust-badges {
+        flex-direction: column;
+    }
+}
+
+/* Performance Optimizations */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

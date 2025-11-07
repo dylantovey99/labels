@@ -1,0 +1,44 @@
+SCREENSHOT REQUIREMENTS FOR LABEL NARRATIVE THEME
+================================================
+
+For the theme to appear correctly in WordPress theme selector, you need to add a screenshot.png file.
+
+FILE SPECIFICATIONS:
+- Filename: screenshot.png
+- Dimensions: 1200px × 900px (4:3 ratio)
+- Format: PNG
+- Location: Root of theme folder (label-narrative-theme/screenshot.png)
+
+WHAT TO INCLUDE IN THE SCREENSHOT:
+1. The hero section with headline
+2. Part of the story or benefits section
+3. Show the professional, clean design
+4. Display the color scheme
+5. Include both text and imagery
+
+DESIGN TIPS:
+- Make it look professional and polished
+- Show the narrative approach
+- Highlight the clean, modern design
+- Include visual interest (don't just show text)
+- Ensure it's recognizable at smaller sizes
+
+TOOLS YOU CAN USE:
+1. Take a screenshot of your live site homepage
+2. Use a design tool like Canva or Figma to create a mockup
+3. Use a browser screenshot tool (e.g., Full Page Screen Capture chrome extension)
+
+QUICK METHOD:
+1. Set up your homepage with demo content
+2. Visit your homepage in a browser
+3. Use browser dev tools to set viewport to 1200×900
+4. Take a screenshot
+5. Save as screenshot.png in theme root
+
+Alternative: Use a free online screenshot tool like:
+- https://www.screely.com/
+- https://screenshots.cloud/
+- Browser screenshot extensions
+
+Once created, place the file at:
+/label-narrative-theme/screenshot.png
