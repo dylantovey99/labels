@@ -493,6 +493,146 @@
     }
 
     // ============================================
+    // 15. INSTANT QUOTE CALCULATOR
+    // ============================================
+    function initQuoteCalculator() {
+        const calculator = document.querySelector('.quote-calculator');
+        if (!calculator) return;
+
+        // Pricing structure (per label in AUD)
+        const pricing = {
+            50: { square: { glossy: 5.00, matte: 5.20 }, circle: { glossy: 5.00, matte: 5.20 } },
+            100: { square: { glossy: 4.00, matte: 4.20 }, circle: { glossy: 4.00, matte: 4.20 } },
+            250: { square: { glossy: 3.50, matte: 3.70 }, circle: { glossy: 3.50, matte: 3.70 } },
+            500: { square: { glossy: 3.00, matte: 3.20 }, circle: { glossy: 3.00, matte: 3.20 } },
+            1000: { square: { glossy: 2.50, matte: 2.70 }, circle: { glossy: 2.50, matte: 2.70 } }
+        };
+
+        // Get form elements
+        const quantityButtons = calculator.querySelectorAll('.quantity-option');
+        const shapeButtons = calculator.querySelectorAll('.shape-option');
+        const finishButtons = calculator.querySelectorAll('.finish-option');
+        const priceDisplay = calculator.querySelector('.price-display');
+        const perLabelDisplay = calculator.querySelector('.per-label-price');
+        const deliveryDisplay = calculator.querySelector('.delivery-time');
+        const saveDisplay = calculator.querySelector('.savings-amount');
+
+        let selectedQuantity = 250; // Default
+        let selectedShape = 'square'; // Default
+        let selectedFinish = 'glossy'; // Default
+
+        // Function to calculate and update price
+        function updatePrice() {
+            const perLabel = pricing[selectedQuantity][selectedShape][selectedFinish];
+            const total = perLabel * selectedQuantity;
+            const basePricePerLabel = pricing[50][selectedShape][selectedFinish];
+            const savings = ((basePricePerLabel - perLabel) * selectedQuantity);
+
+            // Update displays with animation
+            if (priceDisplay) {
+                priceDisplay.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    priceDisplay.textContent = '$' + total.toFixed(2);
+                    priceDisplay.style.transform = 'scale(1)';
+                }, 100);
+            }
+
+            if (perLabelDisplay) {
+                perLabelDisplay.textContent = '$' + perLabel.toFixed(2) + ' each';
+            }
+
+            if (saveDisplay && savings > 0) {
+                saveDisplay.textContent = 'Save $' + savings.toFixed(2);
+                saveDisplay.parentElement.style.display = 'block';
+            } else if (saveDisplay) {
+                saveDisplay.parentElement.style.display = 'none';
+            }
+
+            // Update delivery estimate
+            if (deliveryDisplay) {
+                const days = selectedQuantity >= 500 ? '5-7' : '3-5';
+                deliveryDisplay.textContent = days + ' business days';
+            }
+
+            // Store selections for add to cart
+            calculator.dataset.quantity = selectedQuantity;
+            calculator.dataset.shape = selectedShape;
+            calculator.dataset.finish = selectedFinish;
+            calculator.dataset.price = total.toFixed(2);
+        }
+
+        // Quantity selection
+        quantityButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                quantityButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                selectedQuantity = parseInt(this.dataset.quantity);
+                updatePrice();
+            });
+        });
+
+        // Shape selection
+        shapeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                shapeButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                selectedShape = this.dataset.shape;
+                updatePrice();
+            });
+        });
+
+        // Finish selection
+        finishButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                finishButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                selectedFinish = this.dataset.finish;
+                updatePrice();
+            });
+        });
+
+        // Get Quote button - scroll to product or add to cart
+        const quoteButton = calculator.querySelector('.get-quote-btn');
+        if (quoteButton) {
+            quoteButton.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Scroll to product section
+                const productSection = document.querySelector('#product, .product-section');
+                if (productSection) {
+                    const headerOffset = 100;
+                    const elementPosition = productSection.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Highlight the product section briefly
+                    productSection.style.transition = 'background-color 0.3s ease';
+                    const originalBg = productSection.style.backgroundColor;
+                    productSection.style.backgroundColor = 'rgba(8, 145, 178, 0.05)';
+                    setTimeout(() => {
+                        productSection.style.backgroundColor = originalBg;
+                    }, 1000);
+                }
+
+                // Store calculator data for pre-filling product options
+                sessionStorage.setItem('calculatorQuote', JSON.stringify({
+                    quantity: selectedQuantity,
+                    shape: selectedShape,
+                    finish: selectedFinish,
+                    price: calculator.dataset.price
+                }));
+            });
+        }
+
+        // Initialize with default selection
+        updatePrice();
+    }
+
+    // ============================================
     // INITIALIZE ALL FUNCTIONS
     // ============================================
     function init() {
@@ -509,6 +649,7 @@
         initFormEnhancements();
         initScrollProgress();
         initFocusVisible();
+        initQuoteCalculator();
 
         console.log('Label Narrative Theme initialized - Premium 2025 Design');
     }

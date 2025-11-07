@@ -38,7 +38,7 @@ function label_narrative_customize_register( $wp_customize ) {
 
     // Hero Headline
     $wp_customize->add_setting( 'hero_headline', array(
-        'default'           => __( 'Turn Browsers Into Buyers With Labels That Tell Your Story', 'label-narrative' ),
+        'default'           => __( 'Premium Labels. Instant Quote. Zero Fuss.', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
         'transport'         => 'postMessage',
     ) );
@@ -50,7 +50,7 @@ function label_narrative_customize_register( $wp_customize ) {
 
     // Hero Subheadline
     $wp_customize->add_setting( 'hero_subheadline', array(
-        'default'           => __( 'Professional 9×9cm labels delivered in 5-7 days. Perfect for small batch Australian businesses who refuse to blend in with the competition.', 'label-narrative' ),
+        'default'           => __( 'Professional 9×9cm labels for Australian small businesses. See your price instantly—no email, no waiting.', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_textarea_field',
         'transport'         => 'postMessage',
     ) );

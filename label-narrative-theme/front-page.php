@@ -20,25 +20,129 @@ get_header();
 
         <?php
         // ============================================
-        // HERO SECTION - The Hook
+        // HERO SECTION - Instant Quote Calculator
         // ============================================
-        $hero_headline = get_theme_mod( 'hero_headline', __( 'Your Brand Deserves to Stand Out', 'label-narrative' ) );
-        $hero_subheadline = get_theme_mod( 'hero_subheadline', __( 'Premium 9×9cm labels that tell your story and grow your business', 'label-narrative' ) );
-        $hero_cta_text = get_theme_mod( 'hero_cta_text', __( 'Start Your Label Journey', 'label-narrative' ) );
-        $hero_cta_link = get_theme_mod( 'hero_cta_link', '#product' );
+        $hero_headline = get_theme_mod( 'hero_headline', __( 'Premium Labels. Instant Quote. Zero Fuss.', 'label-narrative' ) );
+        $hero_subheadline = get_theme_mod( 'hero_subheadline', __( 'Professional 9×9cm labels for Australian small businesses. See your price instantly—no email, no waiting.', 'label-narrative' ) );
         $hero_bg_image_id = get_theme_mod( 'hero_background_image', '' );
         $hero_bg_image = $hero_bg_image_id ? wp_get_attachment_image_url( $hero_bg_image_id, 'full' ) : '';
         ?>
-        <section class="hero-section" <?php if ( $hero_bg_image ) echo 'style="background-image: url(' . esc_url( $hero_bg_image ) . ');"'; ?>>
+        <section class="hero-section hero-calculator-section" <?php if ( $hero_bg_image ) echo 'style="background-image: url(' . esc_url( $hero_bg_image ) . ');"'; ?>>
             <div class="hero-overlay">
                 <div class="container">
-                    <div class="hero-content">
-                        <h1 class="hero-headline"><?php echo esc_html( $hero_headline ); ?></h1>
-                        <p class="hero-subheadline"><?php echo esc_html( $hero_subheadline ); ?></p>
-                        <div class="hero-cta">
-                            <a href="<?php echo esc_url( $hero_cta_link ); ?>" class="btn btn-primary btn-large">
-                                <?php echo esc_html( $hero_cta_text ); ?>
-                            </a>
+                    <div class="hero-calculator-grid">
+                        <!-- Left: Headline & Value Props -->
+                        <div class="hero-content">
+                            <h1 class="hero-headline"><?php echo esc_html( $hero_headline ); ?></h1>
+                            <p class="hero-subheadline"><?php echo esc_html( $hero_subheadline ); ?></p>
+
+                            <ul class="hero-trust-points">
+                                <li><span class="trust-icon">✓</span> Aussie-made, professionally printed</li>
+                                <li><span class="trust-icon">✓</span> From 50 labels (no huge minimum orders)</li>
+                                <li><span class="trust-icon">✓</span> Delivered in 3-7 business days</li>
+                                <li><span class="trust-icon">✓</span> Waterproof & scratch-resistant</li>
+                            </ul>
+                        </div>
+
+                        <!-- Right: Instant Quote Calculator -->
+                        <div class="quote-calculator-wrapper">
+                            <div class="quote-calculator">
+                                <div class="calculator-header">
+                                    <h3>Get Your Instant Quote</h3>
+                                    <p>Select your options below</p>
+                                </div>
+
+                                <!-- Quantity Selection -->
+                                <div class="calculator-section">
+                                    <label class="calculator-label">Quantity</label>
+                                    <div class="option-grid quantity-grid">
+                                        <button type="button" class="quantity-option" data-quantity="50">
+                                            <span class="option-value">50</span>
+                                            <span class="option-label">labels</span>
+                                        </button>
+                                        <button type="button" class="quantity-option" data-quantity="100">
+                                            <span class="option-value">100</span>
+                                            <span class="option-label">labels</span>
+                                        </button>
+                                        <button type="button" class="quantity-option active" data-quantity="250">
+                                            <span class="option-value">250</span>
+                                            <span class="option-label">labels</span>
+                                            <span class="popular-badge">Popular</span>
+                                        </button>
+                                        <button type="button" class="quantity-option" data-quantity="500">
+                                            <span class="option-value">500</span>
+                                            <span class="option-label">labels</span>
+                                        </button>
+                                        <button type="button" class="quantity-option" data-quantity="1000">
+                                            <span class="option-value">1000</span>
+                                            <span class="option-label">labels</span>
+                                            <span class="best-value-badge">Best Value</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Shape Selection -->
+                                <div class="calculator-section">
+                                    <label class="calculator-label">Shape</label>
+                                    <div class="option-grid shape-grid">
+                                        <button type="button" class="shape-option active" data-shape="square">
+                                            <svg class="shape-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="5" y="5" width="30" height="30" rx="2"/>
+                                            </svg>
+                                            <span class="option-label">Square</span>
+                                        </button>
+                                        <button type="button" class="shape-option" data-shape="circle">
+                                            <svg class="shape-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="20" cy="20" r="15"/>
+                                            </svg>
+                                            <span class="option-label">Circle</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Finish Selection -->
+                                <div class="calculator-section">
+                                    <label class="calculator-label">Finish</label>
+                                    <div class="option-grid finish-grid">
+                                        <button type="button" class="finish-option active" data-finish="glossy">
+                                            <span class="finish-sample glossy-sample"></span>
+                                            <span class="option-label">Glossy</span>
+                                            <span class="option-description">Vibrant & shiny</span>
+                                        </button>
+                                        <button type="button" class="finish-option" data-finish="matte">
+                                            <span class="finish-sample matte-sample"></span>
+                                            <span class="option-label">Matte</span>
+                                            <span class="option-description">Elegant & smooth</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Price Display -->
+                                <div class="price-summary">
+                                    <div class="price-row">
+                                        <div class="price-main">
+                                            <span class="price-label">Your Price</span>
+                                            <span class="price-display">$875.00</span>
+                                        </div>
+                                        <div class="price-details">
+                                            <span class="per-label-price">$3.50 each</span>
+                                            <span class="delivery-time">3-5 business days</span>
+                                        </div>
+                                    </div>
+                                    <div class="savings-row" style="display: none;">
+                                        <span class="savings-label">💰 You save</span>
+                                        <span class="savings-amount">$375.00</span>
+                                    </div>
+                                </div>
+
+                                <!-- CTA Button -->
+                                <div class="calculator-cta">
+                                    <button type="button" class="btn btn-primary btn-large btn-block get-quote-btn">
+                                        Get This Quote →
+                                    </button>
+                                    <p class="calculator-note">See full details & place order below</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
