@@ -103,7 +103,7 @@ function label_narrative_product_customizer( $wp_customize ) {
     ) );
 
     $wp_customize->add_setting( 'product_story_headline', array(
-        'default'           => __( 'Crafted for Your Success', 'label-narrative' ),
+        'default'           => __( 'The Perfect Size for Your Products', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'product_story_headline', array(
@@ -113,9 +113,13 @@ function label_narrative_product_customizer( $wp_customize ) {
     ) );
 
     $wp_customize->add_setting( 'product_story_content', array(
-        'default'           => __( 'We understand that every label tells a story—your story. That\'s why we use premium paper stock and vibrant, fade-resistant inks to ensure your brand looks its best on every product.
+        'default'           => __( '9×9cm (90mm × 90mm) labels are the sweet spot for Australian small businesses. Big enough to showcase your brand, small enough to fit perfectly on jars, bottles, tins, boxes, and packaging.
 
-Our 9×9cm labels are the perfect size for product packaging, jars, bottles, and boxes. Choose between classic square labels or eye-catching circle labels to match your brand aesthetic.', 'label-narrative' ),
+**Square labels** create a modern, premium look. Perfect for cosmetics, candles, specialty foods, and craft products.
+
+**Circle labels** grab attention and work beautifully on round containers—ideal for jams, sauces, honey, lotions, and beverages.
+
+Both are printed on premium paper stock with professional-grade digital printing technology. The result? Colours so vibrant they make your products impossible to ignore. Durable enough to withstand fridges, freezers, and Australian weather.', 'label-narrative' ),
         'sanitize_callback' => 'wp_kses_post',
     ) );
     $wp_customize->add_control( 'product_story_content', array(
@@ -126,7 +130,7 @@ Our 9×9cm labels are the perfect size for product packaging, jars, bottles, and
 
     // Add to Cart Text
     $wp_customize->add_setting( 'add_to_cart_text', array(
-        'default'           => __( 'Get Your Labels Now', 'label-narrative' ),
+        'default'           => __( 'Order My Labels', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'add_to_cart_text', array(
@@ -137,7 +141,7 @@ Our 9×9cm labels are the perfect size for product packaging, jars, bottles, and
 
     // Trust Badges
     $wp_customize->add_setting( 'product_trust_1', array(
-        'default'           => __( 'Secure Payment', 'label-narrative' ),
+        'default'           => __( '🔒 Secure Checkout', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'product_trust_1', array(
@@ -147,7 +151,7 @@ Our 9×9cm labels are the perfect size for product packaging, jars, bottles, and
     ) );
 
     $wp_customize->add_setting( 'product_trust_2', array(
-        'default'           => __( 'Fast Delivery', 'label-narrative' ),
+        'default'           => __( '🚚 5-7 Day Delivery', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'product_trust_2', array(
@@ -157,7 +161,7 @@ Our 9×9cm labels are the perfect size for product packaging, jars, bottles, and
     ) );
 
     $wp_customize->add_setting( 'product_trust_3', array(
-        'default'           => __( 'Quality Guaranteed', 'label-narrative' ),
+        'default'           => __( '✓ Australian Made', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'product_trust_3', array(
@@ -178,7 +182,7 @@ Our 9×9cm labels are the perfect size for product packaging, jars, bottles, and
     ) );
 
     $wp_customize->add_setting( 'product_specs', array(
-        'default'           => "Size: 9×9cm (90mm × 90mm)\nShapes: Square or Circle\nMaterial: Premium paper stock\nFinish: Glossy or Matte\nAdhesive: Permanent, strong-stick\nPrinting: Full-colour, high-resolution\nMinimum Order: From 50 labels\nDelivery: Australia-wide",
+        'default'           => "Size: 9×9cm (90mm × 90mm) - perfect for jars, bottles, tins & boxes\nShapes: Square or Circle\nMaterial: Premium paper stock with weather-resistant coating\nFinish: Choose Glossy (vibrant & eye-catching) or Matte (sophisticated & elegant)\nAdhesive: Permanent, strong-stick - won't peel or lift\nPrinting: Digital full-colour printing (CMYK + spot colours available)\nMinimum Order: Just 50 labels - no wasteful bulk orders required\nTurnaround: 5-7 business days from order to delivery\nDelivery: Shipped Australia-wide\nMade in: Australia",
         'sanitize_callback' => 'sanitize_textarea_field',
     ) );
     $wp_customize->add_control( 'product_specs', array(

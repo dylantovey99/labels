@@ -38,7 +38,7 @@ function label_narrative_customize_register( $wp_customize ) {
 
     // Hero Headline
     $wp_customize->add_setting( 'hero_headline', array(
-        'default'           => __( 'Your Brand Deserves to Stand Out', 'label-narrative' ),
+        'default'           => __( 'Turn Browsers Into Buyers With Labels That Tell Your Story', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
         'transport'         => 'postMessage',
     ) );
@@ -50,7 +50,7 @@ function label_narrative_customize_register( $wp_customize ) {
 
     // Hero Subheadline
     $wp_customize->add_setting( 'hero_subheadline', array(
-        'default'           => __( 'Premium 9×9cm labels that tell your story and grow your business', 'label-narrative' ),
+        'default'           => __( 'Professional 9×9cm labels delivered in 5-7 days. Perfect for small batch Australian businesses who refuse to blend in with the competition.', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_textarea_field',
         'transport'         => 'postMessage',
     ) );
@@ -62,7 +62,7 @@ function label_narrative_customize_register( $wp_customize ) {
 
     // Hero CTA Text
     $wp_customize->add_setting( 'hero_cta_text', array(
-        'default'           => __( 'Start Your Label Journey', 'label-narrative' ),
+        'default'           => __( 'Get Your Custom Labels', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'hero_cta_text', array(
@@ -114,7 +114,7 @@ function label_narrative_customize_register( $wp_customize ) {
 
     // Story Headline
     $wp_customize->add_setting( 'story_headline', array(
-        'default'           => __( 'Every Great Business Has a Story', 'label-narrative' ),
+        'default'           => __( 'Your Product Is Amazing. Your Labels Should Be Too.', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'story_headline', array(
@@ -125,11 +125,17 @@ function label_narrative_customize_register( $wp_customize ) {
 
     // Story Content
     $wp_customize->add_setting( 'story_content', array(
-        'default'           => __( 'You started your business with passion. You pour your heart into every product, every order, every customer interaction. But in a crowded marketplace, how do you make sure your brand gets noticed?
+        'default'           => __( 'You\'ve spent countless hours perfecting your product. You source the best ingredients. You test and refine. You pour your passion into every single item that leaves your hands.
 
-That\'s where we come in. Our premium 9×9cm labels aren\'t just stickers—they\'re the visual voice of your brand. They\'re the first impression that turns a browser into a buyer, a one-time customer into a loyal advocate.
+But here\'s the harsh truth: in a crowded farmers market, online marketplace, or retail shelf, customers judge your product in 3 seconds or less. And that judgment starts with your label.
 
-Whether you need square labels for your artisan jams or circle labels for your handcrafted soaps, we make it simple to get professional-quality labels in quantities that make sense for small and micro businesses like yours.', 'label-narrative' ),
+A cheap, unclear, or amateurish label tells customers your product is cheap and amateurish—no matter how incredible it actually is.
+
+That\'s where Label Up changes everything. Our professional 9×9cm labels give your handcrafted products the premium presentation they deserve. Vibrant colours. Razor-sharp printing. Durable materials that won\'t peel, fade, or let you down.
+
+From artisan food producers to cosmetics creators, from craft brewers to specialty retailers—Australian small businesses trust us to make their products look as good as they taste, smell, and feel.
+
+Small batches? No problem. We specialize in short-run printing starting from just 50 labels. Get exactly what you need, when you need it, without breaking the bank on massive minimum orders.', 'label-narrative' ),
         'sanitize_callback' => 'wp_kses_post',
     ) );
     $wp_customize->add_control( 'story_content', array(
@@ -170,7 +176,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
 
     // Benefits Headline
     $wp_customize->add_setting( 'benefits_headline', array(
-        'default'           => __( 'Why Australian Small Businesses Choose Us', 'label-narrative' ),
+        'default'           => __( 'Why Australian Small Businesses Choose Label Up', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'benefits_headline', array(
@@ -192,7 +198,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
     ) );
 
     $wp_customize->add_setting( 'benefit_1_title', array(
-        'default'           => __( 'Proudly Australian Made', 'label-narrative' ),
+        'default'           => __( 'Make Your Brand Unforgettable', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'benefit_1_title', array(
@@ -202,7 +208,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
     ) );
 
     $wp_customize->add_setting( 'benefit_1_description', array(
-        'default'           => __( 'Printed locally with premium materials, supporting Australian businesses and ensuring fast delivery.', 'label-narrative' ),
+        'default'           => __( 'Your label is your silent brand ambassador. Professional printing with vibrant, fade-resistant colours creates the emotional connection that turns one-time buyers into lifelong customers.', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_textarea_field',
     ) );
     $wp_customize->add_control( 'benefit_1_description', array(
@@ -223,7 +229,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
     ) );
 
     $wp_customize->add_setting( 'benefit_2_title', array(
-        'default'           => __( 'Perfect for Small Runs', 'label-narrative' ),
+        'default'           => __( 'Small Batches, Zero Waste', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'benefit_2_title', array(
@@ -233,7 +239,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
     ) );
 
     $wp_customize->add_setting( 'benefit_2_description', array(
-        'default'           => __( 'No minimum order quantities that break the bank. Get exactly what you need, when you need it.', 'label-narrative' ),
+        'default'           => __( 'Order from just 50 labels. Test new products, try seasonal flavours, or adapt to customer feedback without being stuck with thousands of labels you can\'t use. Perfect for the agile Australian small business.', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_textarea_field',
     ) );
     $wp_customize->add_control( 'benefit_2_description', array(
@@ -254,7 +260,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
     ) );
 
     $wp_customize->add_setting( 'benefit_3_title', array(
-        'default'           => __( 'Lightning-Fast Turnaround', 'label-narrative' ),
+        'default'           => __( 'Ready When You Need Them', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'benefit_3_title', array(
@@ -264,7 +270,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
     ) );
 
     $wp_customize->add_setting( 'benefit_3_description', array(
-        'default'           => __( 'From design to delivery in days, not weeks. Get your labels when you need them.', 'label-narrative' ),
+        'default'           => __( '5-7 business day turnaround Australia-wide. From order to doorstep in less than a week, so you can launch that new product line, restock before the market, or seize that retail opportunity without the wait.', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_textarea_field',
     ) );
     $wp_customize->add_control( 'benefit_3_description', array(
@@ -285,7 +291,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
     ) );
 
     $wp_customize->add_setting( 'benefit_4_title', array(
-        'default'           => __( 'Professional Quality', 'label-narrative' ),
+        'default'           => __( 'Proudly Australian. Seriously Reliable.', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'benefit_4_title', array(
@@ -295,7 +301,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
     ) );
 
     $wp_customize->add_setting( 'benefit_4_description', array(
-        'default'           => __( 'Vibrant colours, durable material, and precision cutting that makes your products look premium.', 'label-narrative' ),
+        'default'           => __( 'Printed right here in Australia with premium materials and digital printing technology. Support local, reduce your carbon footprint, and get labels that won\'t peel, fade, or fail when it matters most.', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_textarea_field',
     ) );
     $wp_customize->add_control( 'benefit_4_description', array(
@@ -336,7 +342,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
 
     // Trust Badge 1
     $wp_customize->add_setting( 'trust_badge_1_text', array(
-        'default'           => __( '500+ Happy Customers', 'label-narrative' ),
+        'default'           => __( 'Australian Owned & Operated', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'trust_badge_1_text', array(
@@ -347,7 +353,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
 
     // Trust Badge 2
     $wp_customize->add_setting( 'trust_badge_2_text', array(
-        'default'           => __( '5-Star Reviews', 'label-narrative' ),
+        'default'           => __( '5-7 Day Delivery Nationwide', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'trust_badge_2_text', array(
@@ -358,7 +364,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
 
     // Trust Badge 3
     $wp_customize->add_setting( 'trust_badge_3_text', array(
-        'default'           => __( 'Australian Made', 'label-narrative' ),
+        'default'           => __( 'Minimum Order: Just 50 Labels', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'trust_badge_3_text', array(
@@ -369,7 +375,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
 
     // Trust Badge 4
     $wp_customize->add_setting( 'trust_badge_4_text', array(
-        'default'           => __( 'Fast Delivery', 'label-narrative' ),
+        'default'           => __( 'Premium Quality Guaranteed', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'trust_badge_4_text', array(
@@ -399,7 +405,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
 
     // CTA Headline
     $wp_customize->add_setting( 'cta_headline', array(
-        'default'           => __( 'Ready to Transform Your Product Packaging?', 'label-narrative' ),
+        'default'           => __( 'Your Products Deserve Professional Labels', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'cta_headline', array(
@@ -410,7 +416,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
 
     // CTA Subheadline
     $wp_customize->add_setting( 'cta_subheadline', array(
-        'default'           => __( 'Join hundreds of Australian small businesses who have elevated their brand with our premium labels.', 'label-narrative' ),
+        'default'           => __( 'From 50 labels to 5,000, we make it easy to get premium 9×9cm labels delivered to your door in 5-7 days. Square or circle. Glossy or matte. Made in Australia for Australian businesses.', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_textarea_field',
     ) );
     $wp_customize->add_control( 'cta_subheadline', array(
@@ -421,7 +427,7 @@ Whether you need square labels for your artisan jams or circle labels for your h
 
     // CTA Button Text
     $wp_customize->add_setting( 'cta_button_text', array(
-        'default'           => __( 'Get Your Labels Now', 'label-narrative' ),
+        'default'           => __( 'Order Your Labels Today', 'label-narrative' ),
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'cta_button_text', array(
