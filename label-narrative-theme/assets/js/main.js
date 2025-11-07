@@ -1,12 +1,14 @@
 /**
  * Label Narrative Theme - Main JavaScript
- * Handles mobile menu, smooth scrolling, and conversion optimizations
+ * Modern, sophisticated interactions for 2025 e-commerce
  */
 
 (function() {
     'use strict';
 
-    // Mobile Menu Toggle
+    // ============================================
+    // 1. MOBILE MENU
+    // ============================================
     function initMobileMenu() {
         const menuToggle = document.querySelector('.menu-toggle');
         const navigation = document.querySelector('.main-navigation');
@@ -18,7 +20,7 @@
                 navigation.classList.toggle('toggled');
             });
 
-            // Close menu when clicking outside
+            // Close on outside click
             document.addEventListener('click', function(event) {
                 const isClickInside = navigation.contains(event.target) || menuToggle.contains(event.target);
                 if (!isClickInside && navigation.classList.contains('toggled')) {
@@ -27,7 +29,7 @@
                 }
             });
 
-            // Close menu on escape key
+            // Close on escape key
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'Escape' && navigation.classList.contains('toggled')) {
                     navigation.classList.remove('toggled');
@@ -37,23 +39,21 @@
         }
     }
 
-    // Smooth Scrolling for Anchor Links
+    // ============================================
+    // 2. SMOOTH SCROLLING
+    // ============================================
     function initSmoothScroll() {
         const links = document.querySelectorAll('a[href^="#"]');
 
         links.forEach(link => {
             link.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
-
-                // Skip if it's just '#'
                 if (href === '#') return;
 
                 const target = document.querySelector(href);
-
                 if (target) {
                     e.preventDefault();
-
-                    const headerOffset = 80; // Account for sticky header
+                    const headerOffset = 80;
                     const elementPosition = target.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -67,28 +67,95 @@
                     const menuToggle = document.querySelector('.menu-toggle');
                     if (navigation && navigation.classList.contains('toggled')) {
                         navigation.classList.remove('toggled');
-                        if (menuToggle) {
-                            menuToggle.setAttribute('aria-expanded', 'false');
-                        }
+                        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
                     }
                 }
             });
         });
     }
 
-    // Add to Cart Animation
+    // ============================================
+    // 3. STICKY HEADER WITH SCROLL EFFECTS
+    // ============================================
+    function initStickyHeader() {
+        const header = document.querySelector('.site-header');
+        if (!header) return;
+
+        let lastScroll = 0;
+        let ticking = false;
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    const currentScroll = window.pageYOffset;
+
+                    // Add scrolled class for shadow
+                    if (currentScroll > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+
+                    lastScroll = currentScroll;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    }
+
+    // ============================================
+    // 4. INTERSECTION OBSERVER FOR SCROLL REVEALS
+    // ============================================
+    function initScrollReveal() {
+        if (!('IntersectionObserver' in window)) {
+            // Fallback for older browsers
+            return;
+        }
+
+        const revealElements = document.querySelectorAll('.benefit-item, .review-item, .story-section, .product-section');
+
+        const revealObserver = new IntersectionObserver(
+            (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            }
+        );
+
+        revealElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            revealObserver.observe(element);
+        });
+    }
+
+    // ============================================
+    // 5. ADD TO CART ANIMATION
+    // ============================================
     function initAddToCartAnimation() {
         const addToCartButtons = document.querySelectorAll('.single_add_to_cart_button');
 
         addToCartButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Add loading state
+            button.addEventListener('click', function(e) {
+                // Only add visual feedback, don't prevent default
                 if (!this.classList.contains('loading')) {
                     this.classList.add('loading');
                     const originalText = this.textContent;
-                    this.textContent = 'Adding...';
+                    this.textContent = 'Adding to cart...';
 
-                    // Reset after 2 seconds
+                    // Ripple effect
+                    createRipple(e, this);
+
                     setTimeout(() => {
                         this.classList.remove('loading');
                         this.textContent = originalText;
@@ -98,176 +165,352 @@
         });
     }
 
-    // Sticky Header on Scroll
-    function initStickyHeader() {
-        const header = document.querySelector('.site-header');
-        let lastScroll = 0;
+    // ============================================
+    // 6. RIPPLE EFFECT ON BUTTONS
+    // ============================================
+    function createRipple(event, button) {
+        const ripple = document.createElement('span');
+        const rect = button.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = event.clientX - rect.left - size / 2;
+        const y = event.clientY - rect.top - size / 2;
 
-        if (!header) return;
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
 
-        window.addEventListener('scroll', function() {
-            const currentScroll = window.pageYOffset;
+        button.appendChild(ripple);
 
-            // Add shadow when scrolled
-            if (currentScroll > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-
-            lastScroll = currentScroll;
-        });
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
     }
 
-    // Product Image Gallery Enhancement
-    function initProductGallery() {
-        const productImages = document.querySelectorAll('.woocommerce-product-gallery__image');
+    function initButtonRipples() {
+        const buttons = document.querySelectorAll('.btn, button.button');
 
-        productImages.forEach(image => {
-            image.addEventListener('click', function(e) {
-                // Prevent default if you want custom lightbox behavior
-                // e.preventDefault();
-            });
-        });
-    }
-
-    // Cart Count Animation
-    function updateCartCount() {
-        const cartCount = document.querySelector('.cart-count');
-
-        if (cartCount) {
-            // Trigger animation when cart count changes
-            const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    if (mutation.type === 'childList') {
-                        cartCount.style.animation = 'none';
-                        setTimeout(() => {
-                            cartCount.style.animation = 'cartBounce 0.5s ease';
-                        }, 10);
-                    }
-                });
-            });
-
-            observer.observe(cartCount, {
-                childList: true,
-                characterData: true
-            });
-        }
-    }
-
-    // Scroll Reveal Animation (for elements coming into view)
-    function initScrollReveal() {
-        const reveals = document.querySelectorAll('.benefit-item, .review-item, .trust-badge-item');
-
-        if ('IntersectionObserver' in window) {
-            const revealObserver = new IntersectionObserver(
-                (entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('revealed');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                },
-                {
-                    threshold: 0.15
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Only create ripple if button doesn't already have one
+                if (!this.querySelector('.ripple')) {
+                    createRipple(e, this);
                 }
-            );
-
-            reveals.forEach(reveal => {
-                reveal.style.opacity = '0';
-                reveal.style.transform = 'translateY(20px)';
-                reveal.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-
-                revealObserver.observe(reveal);
-
-                // Add revealed class handler
-                reveal.addEventListener('transitionend', function() {
-                    if (this.classList.contains('revealed')) {
-                        this.style.opacity = '1';
-                        this.style.transform = 'translateY(0)';
-                    }
-                });
             });
-        } else {
-            // Fallback for browsers without IntersectionObserver
-            reveals.forEach(reveal => {
-                reveal.style.opacity = '1';
-                reveal.style.transform = 'translateY(0)';
-            });
-        }
-    }
-
-    // Detect when user is about to leave (exit intent)
-    function initExitIntent() {
-        let hasShownExitIntent = false;
-
-        document.addEventListener('mouseleave', function(e) {
-            // Only trigger on desktop and if cursor is moving towards top of page
-            if (e.clientY <= 0 && !hasShownExitIntent && window.innerWidth > 768) {
-                hasShownExitIntent = true;
-
-                // You can trigger a popup or special offer here
-                // For now, we'll just log it
-                console.log('User showing exit intent');
-
-                // Example: Show a discount popup
-                // showExitIntentPopup();
-            }
         });
-    }
 
-    // Add CSS animation for cart bounce
-    function addCartAnimation() {
-        if (!document.querySelector('#cart-bounce-animation')) {
+        // Add ripple styles dynamically
+        if (!document.querySelector('#ripple-styles')) {
             const style = document.createElement('style');
-            style.id = 'cart-bounce-animation';
+            style.id = 'ripple-styles';
             style.textContent = `
-                @keyframes cartBounce {
-                    0%, 100% { transform: scale(1); }
-                    50% { transform: scale(1.2); }
+                .ripple {
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    transform: scale(0);
+                    animation: ripple-animation 0.6s ease-out;
+                    pointer-events: none;
+                }
+                @keyframes ripple-animation {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
                 }
             `;
             document.head.appendChild(style);
         }
     }
 
-    // Apply theme colors from customizer
-    function applyCustomizerColors() {
-        // This would be populated by wp_localize_script in a real implementation
-        // For now, we'll use CSS variables which are already set
+    // ============================================
+    // 7. CART COUNT ANIMATION
+    // ============================================
+    function initCartCountAnimation() {
+        const cartCount = document.querySelector('.cart-count');
+
+        if (cartCount) {
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                        cartCount.style.transform = 'scale(1.3)';
+                        setTimeout(() => {
+                            cartCount.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                });
+            });
+
+            observer.observe(cartCount, {
+                childList: true,
+                characterData: true,
+                subtree: true
+            });
+
+            // Add transition style
+            cartCount.style.transition = 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        }
     }
 
-    // Performance: Lazy load images
+    // ============================================
+    // 8. PARALLAX EFFECT ON HERO
+    // ============================================
+    function initParallax() {
+        const hero = document.querySelector('.hero-section');
+        if (!hero) return;
+
+        let ticking = false;
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    const scrolled = window.pageYOffset;
+                    const parallaxSpeed = 0.5;
+
+                    if (scrolled < hero.offsetHeight) {
+                        hero.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+                    }
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    }
+
+    // ============================================
+    // 9. IMAGE LAZY LOADING
+    // ============================================
     function initLazyLoading() {
         if ('loading' in HTMLImageElement.prototype) {
             const images = document.querySelectorAll('img[loading="lazy"]');
             images.forEach(img => {
-                img.src = img.dataset.src || img.src;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                }
             });
         } else {
-            // Fallback for browsers that don't support lazy loading
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
-            document.body.appendChild(script);
+            // Intersection Observer fallback
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            if (img.dataset.src) {
+                                img.src = img.dataset.src;
+                                img.classList.add('loaded');
+                                observer.unobserve(img);
+                            }
+                        }
+                    });
+                });
+
+                const lazyImages = document.querySelectorAll('img[data-src]');
+                lazyImages.forEach(img => imageObserver.observe(img));
+            }
         }
     }
 
-    // Initialize all functions when DOM is ready
+    // ============================================
+    // 10. PRODUCT GALLERY ENHANCEMENTS
+    // ============================================
+    function initProductGallery() {
+        const galleryImages = document.querySelectorAll('.woocommerce-product-gallery__image');
+
+        galleryImages.forEach(image => {
+            image.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+
+            image.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    }
+
+    // ============================================
+    // 11. FORM FOCUS ENHANCEMENTS
+    // ============================================
+    function initFormEnhancements() {
+        const inputs = document.querySelectorAll('input, textarea, select');
+
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('focused');
+            });
+        });
+    }
+
+    // ============================================
+    // 12. SCROLL PROGRESS INDICATOR
+    // ============================================
+    function initScrollProgress() {
+        // Only on product pages or long pages
+        if (document.body.classList.contains('single-product')) {
+            const progressBar = document.createElement('div');
+            progressBar.className = 'scroll-progress';
+            progressBar.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 0%;
+                height: 3px;
+                background: linear-gradient(90deg, #0891b2, #db2777);
+                z-index: 9999;
+                transition: width 0.1s ease-out;
+            `;
+            document.body.appendChild(progressBar);
+
+            let ticking = false;
+
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        const scrolled = (window.scrollY / windowHeight) * 100;
+                        progressBar.style.width = scrolled + '%';
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        }
+    }
+
+    // ============================================
+    // 13. PERFORMANCE: DEBOUNCE UTILITY
+    // ============================================
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // ============================================
+    // 14. ACCESSIBILITY: FOCUS VISIBLE
+    // ============================================
+    function initFocusVisible() {
+        let hadKeyboardEvent = true;
+        let hadFocusVisibleRecently = false;
+        let hadFocusVisibleRecentlyTimeout;
+
+        const inputTypesWhitelist = {
+            text: true,
+            search: true,
+            url: true,
+            tel: true,
+            email: true,
+            password: true,
+            number: true,
+            date: true,
+            month: true,
+            week: true,
+            time: true,
+            datetime: true,
+            'datetime-local': true
+        };
+
+        function onKeyDown(e) {
+            if (e.metaKey || e.altKey || e.ctrlKey) {
+                return;
+            }
+            hadKeyboardEvent = true;
+        }
+
+        function onPointerDown() {
+            hadKeyboardEvent = false;
+        }
+
+        function onFocus(e) {
+            if (e.target.classList.contains('focus-visible')) {
+                return;
+            }
+
+            if (hadKeyboardEvent || focusTriggersKeyboardModality(e.target)) {
+                e.target.classList.add('focus-visible');
+                hadFocusVisibleRecently = true;
+                clearTimeout(hadFocusVisibleRecentlyTimeout);
+                hadFocusVisibleRecentlyTimeout = setTimeout(() => {
+                    hadFocusVisibleRecently = false;
+                }, 100);
+            }
+        }
+
+        function onBlur(e) {
+            if (e.target.classList.contains('focus-visible')) {
+                e.target.classList.remove('focus-visible');
+            }
+        }
+
+        function focusTriggersKeyboardModality(el) {
+            const type = el.type;
+            const tagName = el.tagName;
+
+            if (tagName === 'INPUT' && inputTypesWhitelist[type] && !el.readOnly) {
+                return true;
+            }
+
+            if (tagName === 'TEXTAREA' && !el.readOnly) {
+                return true;
+            }
+
+            if (el.isContentEditable) {
+                return true;
+            }
+
+            return false;
+        }
+
+        document.addEventListener('keydown', onKeyDown, true);
+        document.addEventListener('mousedown', onPointerDown, true);
+        document.addEventListener('pointerdown', onPointerDown, true);
+        document.addEventListener('touchstart', onPointerDown, true);
+        document.addEventListener('focus', onFocus, true);
+        document.addEventListener('blur', onBlur, true);
+
+        // Add CSS for focus-visible
+        if (!document.querySelector('#focus-visible-styles')) {
+            const style = document.createElement('style');
+            style.id = 'focus-visible-styles';
+            style.textContent = `
+                .focus-visible {
+                    outline: 2px solid #0891b2;
+                    outline-offset: 2px;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    }
+
+    // ============================================
+    // INITIALIZE ALL FUNCTIONS
+    // ============================================
     function init() {
         initMobileMenu();
         initSmoothScroll();
-        initAddToCartAnimation();
         initStickyHeader();
-        initProductGallery();
-        updateCartCount();
         initScrollReveal();
-        initExitIntent();
-        addCartAnimation();
-        applyCustomizerColors();
+        initAddToCartAnimation();
+        initButtonRipples();
+        initCartCountAnimation();
+        initParallax();
         initLazyLoading();
+        initProductGallery();
+        initFormEnhancements();
+        initScrollProgress();
+        initFocusVisible();
 
-        console.log('Label Narrative Theme initialized');
+        console.log('Label Narrative Theme initialized - Premium 2025 Design');
     }
 
     // DOM Ready
@@ -276,5 +519,8 @@
     } else {
         init();
     }
+
+    // Expose debounce utility globally
+    window.labelNarrativeDebounce = debounce;
 
 })();
