@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+build/
+dist/
+.venv/
+venv/
+.eggs/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Environment
+.env
+.env.local
+
+# Pass 1 cache (committed schema, not data)
+data/cache/*.db
+data/cache/*.db-journal
+
+# Per-shoot state lives outside the repo (see cowork-config.albums_root)
+# but if anyone drops a shoot here by mistake, don't commit it
+00_inbox/
+01_classifying/
+02_sequencing/
+03_rendering/
+04_internal_qc/
+05_photographer_review/
+06_revisions/
+07_approved/
+08_print_ready/
+09_archived/
+10_manual/
+_failed/
