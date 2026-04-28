@@ -1,0 +1,58 @@
+# Test fixture — minimal but exercises every section of CoworkConfig.
+albums_root: /tmp/test_albums
+
+operators:
+  alice:
+    email: alice@example.com
+    digest_time: "08:00"
+    digest_channel: email
+    realtime_channel: desktop
+    out_of_office:
+      - {start: 2026-06-01, end: 2026-06-07, backup: bob}
+  bob:
+    email: bob@example.com
+    digest_time: "09:30"
+    digest_channel: slack
+    realtime_channel: slack
+    out_of_office: []
+
+senior_reviewer: dylan
+intake_default_primary: alice
+
+photographers:
+  - name: test-photographer
+    email: test@example.com
+    default_house_style: classic
+    default_album_sku: 12x12_lay_flat_lustre
+    default_sla_tier: standard
+    forward_to_client_policy: permissive
+
+sla_tiers:
+  standard:
+    total_days: 7
+    qc_warn_hours: 24
+    review_warn_days: 3
+    review_escalate_days: 7
+  rush:
+    total_hours: 48
+    qc_warn_hours: 4
+    review_warn_hours: 24
+    review_escalate_hours: 72
+
+api:
+  anthropic_api_key_env: ANTHROPIC_API_KEY
+  vision_model: claude-sonnet-4-7
+  sequencer_model: claude-sonnet-4-7
+  intent_classifier_model: claude-haiku-4-5
+
+web:
+  host: 127.0.0.1
+  port: 8088
+  external_base_url: https://test.example.com
+
+print_handoff:
+  type: folder_move
+  destination: /tmp/printqueue
+  notification:
+    type: email
+    to: prod@example.com

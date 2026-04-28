@@ -1,0 +1,15 @@
+# Album SKU: 12×12 lay-flat lustre. See BUILD_SPEC.md §5.2.
+sku_id: 12x12_lay_flat_lustre
+display_name: "12×12 Lay-Flat Lustre"
+page_width_mm: 305
+page_height_mm: 305
+bleed_mm: 3
+binding_type: lay_flat
+hinge_zone_mm: 8           # see §12.7 — non-negotiable for lay-flat
+outer_safe_margin_mm: 12
+inner_safe_margin_mm: 12
+paper_type: lustre
+output_dpi: 300
+output_color_space: sRGB
+target_spread_count: 30
+lab_template: brilliant_internal

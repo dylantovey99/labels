@@ -1,0 +1,64 @@
+# Operator + photographer wiring. See BUILD_SPEC.md §5.1 for schema.
+# Adjust albums_root, photographer list, and api.* model IDs for the deployed env.
+
+albums_root: /Users/dylan/BrilliantPrints/Albums
+
+operators:
+  meagan:
+    email: meagan@brilliantprints.com.au
+    digest_time: "09:00"
+    digest_channel: email
+    realtime_channel: desktop
+    out_of_office: []
+  juli:
+    email: juli@brilliantprints.com.au
+    digest_time: "07:30"
+    digest_channel: slack
+    realtime_channel: slack
+    out_of_office: []
+
+senior_reviewer: dylan
+intake_default_primary: meagan
+
+photographers:
+  - name: jane-doe-photography
+    email: jane@example.com
+    default_house_style: editorial
+    default_album_sku: 12x12_lay_flat_lustre
+    default_sla_tier: standard
+    forward_to_client_policy: permissive
+
+sla_tiers:
+  standard:
+    total_days: 7
+    qc_warn_hours: 24
+    review_warn_days: 3
+    review_escalate_days: 7
+  rush:
+    total_hours: 48
+    qc_warn_hours: 4
+    review_warn_hours: 24
+    review_escalate_hours: 72
+  express:
+    total_hours: 24
+    qc_warn_minutes: 60
+    review_warn_hours: 4
+    review_escalate_hours: 24
+
+api:
+  anthropic_api_key_env: ANTHROPIC_API_KEY
+  vision_model: claude-sonnet-4-7
+  sequencer_model: claude-sonnet-4-7
+  intent_classifier_model: claude-haiku-4-5
+
+web:
+  host: 127.0.0.1
+  port: 8088
+  external_base_url: https://albums.brilliantprints.com.au
+
+print_handoff:
+  type: folder_move
+  destination: /Volumes/Production/PrintQueue/
+  notification:
+    type: email
+    to: production@brilliantprints.com.au

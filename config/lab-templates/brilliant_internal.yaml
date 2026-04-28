@@ -1,0 +1,19 @@
+# Default lab template — see BUILD_SPEC.md §5.3 and §10.
+# JPEG/sRGB/per-spread is the v1 default and the lowest-common-denominator
+# format premium photo book labs accept (§12.5).
+template_id: brilliant_internal
+display_name: "Brilliant Prints Internal"
+
+output_format: jpeg
+jpeg_quality: 92
+color_space: sRGB
+icc_profile_path: null
+
+folder_structure: per_spread
+file_naming: "spread_{spread:03d}/page_{side}.jpg"
+include_bleed: true
+manifest_format: json
+manifest_filename: album_manifest.json
+
+cover_handling: manual
+cover_export_path: cover/cover_hero.jpg

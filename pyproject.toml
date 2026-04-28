@@ -1,0 +1,87 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "album-pipeline"
+version = "0.1.0"
+description = "Automated photo album sequencing and layout pipeline for Brilliant Prints"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+authors = [{ name = "Brilliant Prints" }]
+
+dependencies = [
+    "anthropic>=0.40",
+    "pillow>=10.4",
+    "imagehash>=4.3",
+    "pyyaml>=6.0",
+    "pydantic>=2.7",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "jinja2>=3.1",
+    "typer>=0.12",
+    "httpx>=0.27",
+    "python-frontmatter>=1.1",
+]
+
+[project.optional-dependencies]
+# HEIC input support (Phase 1+). Requires libheif system library.
+heif = ["pillow-heif>=0.18"]
+# PDF lab-template adapter (Phase 4). Requires libqpdf system library.
+pdf = ["pikepdf>=9.0"]
+# IDML lab-template adapter (Phase 4).
+idml = ["simple-idml>=1.0"]
+# Dev / test
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+album-pipeline = "album_pipeline.cli.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+album_pipeline = ["py.typed"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["data", "tests/fixtures"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "SIM", # flake8-simplify
+]
+ignore = [
+    "E501", # line length is enforced by formatter, not lint
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["B"]
+# Typer's idiomatic pattern is `arg: T = typer.Option(...)` / `typer.Argument(...)`
+# in defaults; bugbear's B008 flags this. Suppress only in CLI modules.
+"src/album_pipeline/cli/**/*.py" = ["B008"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+asyncio_mode = "auto"
+markers = [
+    "integration: integration tests (slower, may need fixtures)",
+    "calibration: manual calibration tests, not run in CI",
+]
